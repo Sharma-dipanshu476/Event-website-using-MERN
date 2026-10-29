@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { listEvents, getEvent, createEvent, updateEvent, deleteEvent } from "../controllers/eventController.js";
+import { protect, organizerOnly } from "../middleware/authMiddleware.js";
+const router = Router();
+router.get("/", listEvents);
+router.get("/:id", getEvent);
+router.post("/", protect, organizerOnly, createEvent);
+router.put("/:id", protect, organizerOnly, updateEvent);
+router.delete("/:id", protect, organizerOnly, deleteEvent);
+export default router;
